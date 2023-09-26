@@ -1,117 +1,143 @@
 // Framework CSS maison
-@use "./variables" as * with(
-    $v_enable-radius: true,
+@use "./variables" as *
+    with(
+        $v_enable-radius: true,
 
-    $v_color-primary: #1E3557,
-    $v_color-secondary: #A7D9DB,
-    $v_color-tertiary: #FF6D74,
-    $v_adjust-set-color: 25,
+        $v_color-primary: #1e3557,
+        $v_color-secondary: #a7d9db,
+        $v_color-tertiary: #ff6d74,
+        $v_adjust-set-color: 25,
 
-    $v_margin-md: 3rem,
-    $v_margin-xl: 5rem,
-    $v_margin-2xl: 6rem,
-    $v_margin-3xl: 8rem,
-    $v_padding-2xl: 6rem,
-    $v_padding-3xl: 8rem,
-    $v_container-max-width: 114rem,
+        $v_margin-md: 3rem,
+        $v_margin-xl: 5rem,
+        $v_margin-2xl: 6rem,
+        $v_margin-3xl: 8rem,
+        $v_padding-2xl: 6rem,
+        $v_padding-3xl: 8rem,
+        $v_container-max-width: 114rem,
 
-    $v_font-family: "Lato",
-    $v_font-family-titre: "Raleway",
+        $v_font-family: "Lato",
+        $v_font-family-titre: "Raleway",
 
-    $v_h1-font-size-multiplier: 3.15,
-    $v_h2-font-size-multiplier: 2,
-    $v_h3-font-size-multiplier: 1.75,
+        $v_h1-font-size-multiplier: 3.15,
+        $v_h2-font-size-multiplier: 2,
+        $v_h3-font-size-multiplier: 1.75,
 
-    $v_border-radius-xl: 10rem,
+        $v_border-radius-xl: 10rem,
 
-    //btn
-    $v_button-padding: 1.1rem 1.7rem,
-
-);
+        //btn
+        $v_button-padding: 1.1rem 1.7rem
+    );
 @use "./mixins" as *;
 @use "./reset" as *;
 @use "./class" as *;
 @use "./components" as *;
 @use "./vendors" as *;
-@use 'sass:math' as *;
+@use "sass:math" as *;
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic");
 @import url("https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic");
 
+%slider-arrow {
+    font-size: 0;
+    @include m_box(4rem);
+    border: 0.1rem solid #c4c4c4;
+    color: #c4c4c4;
+    border-radius: 10rem;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    transition: all 0.3s ease-in-out;
+
+    &::before,
+    i {
+        font-size: 1.2rem;
+    }
+
+    &:hover {
+        border-color: $v_color-tertiary;
+        color: $v_color-tertiary;
+    }
+}
+
 // Css
-h1,h2,h3{
+body{
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
     line-height: 1.2;
 }
 
-h1{
+h1 {
     color: $v_color-secondary;
     margin: 0;
 }
 
-h2{
+h2 {
     margin: 3rem 0 2rem 0;
 
-    .small{
-        @include rfs_font-size($v_h2-font-size - .6rem);
+    .small {
+        @include rfs_font-size($v_h2-font-size - 0.6rem);
     }
 }
 
-h3{
+h3 {
     margin: 2rem 0 1rem 0;
 }
 
 // Menu
-.header{
+.header {
     position: sticky;
-    background-color: #FFF;
+    background-color: #fff;
+    box-shadow: 0 0 1rem rgb(0 0 0 / 5%);
     top: 0;
     padding: 1.9rem 0;
     z-index: $v_z-index-fixed;
 
-    &__container{
-        @include m_flex(row,wrap,center, center);
+    &__container {
+        @include m_flex(row, wrap, center, center);
         grid-gap: 1.6rem;
 
-        @include m_breakpoint-between(md,1100){
+        @include m_breakpoint-between(md, 1100) {
             flex-direction: column;
         }
 
-        @include m_breakpoint(max,md){
+        @include m_breakpoint(max, md) {
             justify-content: space-between;
         }
     }
 }
 
-.menu{
-    @include m_flex(row,wrap,end, center);
+.menu {
+    @include m_flex(row, wrap, end, center);
     flex: 1;
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     transform-origin: center top;
 
-    @include m_breakpoint(max,md){
+    @include m_breakpoint(max, md) {
         flex-direction: column;
         align-items: flex-start;
         position: absolute;
         left: 0;
         bottom: 0;
         transform: translateY(100%) scaleY(0);
-        background-color: #FFF;
+        background-color: #fff;
         width: 100%;
         grid-gap: 1.6rem;
         padding: 3rem 1.5rem;
     }
 
-    &__item{
-
-        @include m_breakpoint(min,md){
-
-            &+.menu__item:not(.menu__item--focus){
-    
-                &::before{
-                    content: '';
+    &__item {
+        @include m_breakpoint(min, md) {
+            & + .menu__item:not(.menu__item--focus) {
+                &::before {
+                    content: "";
                     display: inline-block;
                     height: 3rem;
-                    width: .1rem;
+                    width: 0.1rem;
                     background-color: $v_color-secondary;
                     margin: 0 clamp(1rem, 1vw, 2rem);
                     vertical-align: middle;
@@ -119,46 +145,44 @@ h3{
             }
         }
 
-        &:not(.menu__item--focus) a{
+        &:not(.menu__item--focus) a {
             line-height: 2;
 
             &:hover,
-            &:focus{
+            &:focus {
                 color: $v_color-secondary;
             }
         }
 
-        &.active a{
+        &.active a {
             font-weight: 700;
         }
 
-        &--focus{
-
-            @include m_breakpoint(min,md){
+        &--focus {
+            @include m_breakpoint(min, md) {
                 margin-left: clamp(1rem, 3vw, 4rem);
             }
 
-            a{
-                @extend .btn-tertiary;                
+            a {
+                @extend .btn-tertiary;
             }
         }
     }
 }
 
-.menu-toggle{
-
-    svg{
+.menu-toggle {
+    svg {
         width: 100%;
         max-width: 5rem;
         height: 5rem;
     }
 
-    path.line{
+    path.line {
         fill: none;
         stroke: #000;
         stroke-width: 6;
         transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+            stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 
         &1 {
             stroke-dasharray: 60 207;
@@ -175,13 +199,10 @@ h3{
     }
 }
 
-.menuOpen{
-
-    .menu-toggle{
-
-        path.line{
-            
-            @include m_breakpoint(max, md){
+.menuOpen {
+    .menu-toggle {
+        path.line {
+            @include m_breakpoint(max, md) {
                 stroke: #000;
             }
 
@@ -203,19 +224,18 @@ h3{
         }
     }
 
-    .menu{
-
-        @include m_breakpoint(max,md){
+    .menu {
+        @include m_breakpoint(max, md) {
             transform: translateY(100%) scale(1);
         }
     }
 }
 
 // Entete
-.headerContent{
+.headerContent {
     position: relative;
 
-    .shapes{
+    .shapes {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -223,81 +243,82 @@ h3{
         top: 0;
         left: 0;
 
-        @include m_breakpoint(max,lg){
+        @include m_breakpoint(max, lg) {
             display: none;
         }
 
-        &>*{
+        & > * {
             position: absolute;
-            border-radius: 10rem
+            border-radius: 10rem;
         }
 
-        .shape1{
+        .shape1 {
             @include m_box(4rem);
-            border: .3rem solid #FFF;
+            border: 0.3rem solid #fff;
 
-            right: 38vw;
+            right: 38.5%;
             top: 8%;
         }
-        .shape2{
+        .shape2 {
             @include m_box(2.1rem);
             background-color: $v_color-tertiary;
 
-            right: 40vw;
+            right: 41%;
             top: 48%;
         }
 
-        .shape3{
+        .shape3 {
             @include m_box(5.2rem);
-            border: .3rem solid #FFF;
+            border: 0.3rem solid #fff;
 
-            left: 46vw;
+            left: 46.5%;
             bottom: 14%;
         }
     }
 
-    &__container{
-        @include m_mw-basis(35rem, 50%, 3rem clamp(3rem, 10vw, 20rem), ".headerContent__right", ".headerContent__left");
+    &__container {
+        @include m_mw-basis(
+            34rem,
+            50%,
+            3rem clamp(3rem, 10vw, 20rem),
+            ".headerContent__right",
+            ".headerContent__left"
+        );
         align-items: center;
         position: relative;
         z-index: 1;
     }
 
-    &__right{
-
-        svg{
+    &__right {
+        svg {
             width: 100%;
         }
     }
 }
 
-
 // Layout
-.col{
-
-    &-2-3{
+.col {
+    &-2-3 {
         display: grid;
         grid-template-columns: 40% 1fr;
         grid-gap: 3rem clamp(3rem, 10vw, 6rem);
 
-        @include m_breakpoint(max,lg){
+        @include m_breakpoint(max, lg) {
             display: flex;
             flex-direction: column;
             /* Je n'ai pas mis l'image en 1er car j'estime qu'en responsive en scrollant on souhaite avoir le contenu qu'une image */
         }
     }
 
-    &-1-2{
-        
-        @include m_breakpoint(min,md){
+    &-1-2 {
+        @include m_breakpoint(min, md) {
             display: grid;
             grid-template-columns: 33% 1fr;
             grid-gap: 3rem clamp(3rem, 10vw, 6rem);
         }
 
-        @include m_breakpoint(max,md){
-
-            .col-left{
+        @include m_breakpoint(max, md) {
+            .col-left {
                 display: none;
                 /* Image inutile en responsive rajoute du scroll inutile */
             }
@@ -305,39 +326,41 @@ h3{
     }
 }
 
-
 // Composants
-.resetList{
+.resetList {
     @extend %v_ul-noSkin;
 }
 
-.c-white{
-    color: #FFF;
+.c-white {
+    color: #fff;
 }
 
-.underline{
-    background: linear-gradient(120deg, $v_color-secondary 0%, $v_color-secondary 100%);
+.underline {
+    background: linear-gradient(
+        120deg,
+        $v_color-secondary 0%,
+        $v_color-secondary 100%
+    );
     background-repeat: no-repeat;
     background-size: 100% 0.7ch;
     background-position: center 95%;
 }
 
-.shadow{
-
-    &-secondary{
+.shadow {
+    &-secondary {
         box-shadow: 2rem 2rem $v_color-secondary;
     }
 }
 
-.card{
-    --card-bg: #FFF;
+.card {
+    --card-bg: #fff;
     --img-length: 9rem;
 
     display: grid;
     grid-template-rows: repeat(2, var(--img-length)) 1fr;
     justify-items: center;
 
-    &__img{
+    &__img {
         position: relative;
         z-index: 1;
         grid-column: 1/2;
@@ -347,145 +370,265 @@ h3{
         @include m_box(calc(2 * var(--img-length)));
         padding: 4rem 4.5rem;
 
-        img{
+        img {
             @include m_box(100%);
             object-fit: contain;
             object-position: center;
         }
     }
 
-    &__container{
+    &__container {
         grid-column: 1/2;
         grid-row: 2/4;
         background-color: var(--card-bg);
         padding-top: var(--img-length);
         @include rfs_padding-x(3.5rem);
         @include rfs_padding-bottom(5rem);
-        border-radius: 1rem
+        border-radius: 1rem;
     }
 }
 
-.btn{
-
-    &-primary{
+.btn {
+    &-primary {
         @include comp_btn-standard($v_color-primary);
         font-weight: 700;
-        
     }
 
-    &-secondary{
+    &-secondary {
         @include comp_btn-standard($v_color-secondary);
         font-weight: 700;
     }
 
-    &-tertiary{
+    &-tertiary {
         @include comp_btn-standard($v_color-tertiary);
         font-weight: 700;
     }
 
-    &-underline{
+    &-underline {
         color: $v_color-tertiary;
         text-decoration: underline;
 
         &:hover,
-        &:focus{
+        &:focus {
             color: $v_color-secondary;
             text-decoration: underline;
         }
     }
 }
 
-
 // Slider
-.slider{
+.slider {
     width: 95vw;
     margin-left: 5vw;
+    overflow-x: hidden;
 
-    &__top{
+    @include m_breakpoint(max,sm){
+        margin: 0 auto;
+        padding: 0 1.6rem;
+    }
+
+    .slick-slide {
+        margin: 0 1rem;
+    }
+
+    .slick-list {
+        margin: 0 -2rem;
+    }
+
+    &__top {
         position: relative;
     }
 
-    &__btns{
+    &__container{
+        
+        @include m_breakpoint(min,sm){
+            width: calc(95vw + 16%);
+        }
+    }
+
+    &__btns {
         position: absolute;
-        right: 0;
+        right: 1.6rem;
         bottom: 0;
+        display: flex;
+        grid-gap: 2rem;
+
+        @include m_breakpoint(max, sm) {
+            position: relative;
+            right: 0;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .slick-arrow {
+            @extend %slider-arrow;
+        }
+
+        .slick-prev,
+        .slick-next {
+            position: relative;
+
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                display: inline-block;
+                position: absolute;
+                @include m_translate-center();
+            }
+        }
+
+        .slick-prev::before {
+            content: "\f177";
+        }
+
+        .slick-next::before {
+            content: "\f178";
+        }
+    }
+
+    &__item {
+        & > * {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+    }
+
+    &__img {
+        grid-row: 1/-1;
+        grid-column: 1/-1;
+
+        img {
+            width: 100%;
+            height: 40rem;
+            object-fit: cover;
+            object-position: left center;
+            
+            @include m_breakpoint(max,sm){
+                height: 30rem;
+            }
+        }
+    }
+
+    &__itemContainer {
+        position: relative;
+        z-index: 1;
+        align-self: flex-end;
+        @include rfs_padding(3rem);
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        grid-gap: 1rem;
+        background: linear-gradient(0deg, rgb(0 0 0 / 50%), transparent);
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: 300;
+    }
+
+    &__link {
+        @extend %slider-arrow;
+        border-color: #fff;
+        color: #fff;
+
+        &:hover {
+            border-color: #fff;
+            background-color: #fff;
+            color: #000;
+        }
     }
 }
 
+.slick-initialized .slick-slide.slider__item {
+    display: grid;
+}
 
 // Footer
-.footer{
+.footer {
     font-size: 1.4rem;
 
-    &__menu{
+    &__menu {
         @extend %v_ul-noSkin;
         @include m_flex(row, wrap, flex-start, flex-start);
         @include m_cols(4, flex, 15rem);
         grid-gap: 1.6rem;
 
-        &--bottom{
-
-            li+li::before{
-                content: '|';
+        &--bottom {
+            li + li::before {
+                content: "|";
                 display: inline-block;
-                margin: 0 .4rem;
+                margin: 0 0.4rem;
             }
         }
     }
 
-    &__bottom{
+    &__bottom {
         padding: 1.6rem 0;
         font-weight: 700;
     }
 
-    &__title{
+    &__title {
         display: block;
         font-weight: 700;
         margin-bottom: 1.5rem;
         font-size: 1.6rem;
     }
 
-    &__container{
-        @include m_flex(row,wrap);
-        @include m_cols(4,flex,20rem);
+    &__container {
+        @include m_flex(row, wrap);
+        @include m_cols(4, flex, 20rem);
         grid-gap: 3rem clamp(1.5rem, 10vw, 5rem);
-        
-        &>*+*{
-            padding-left: clamp(1.5rem, 10vw, 5rem);
-            border-left: .1rem solid $v_color-secondary;
 
-            @include m_breakpoint(max,sm){
+        & > * + * {
+            padding-left: clamp(1.5rem, 10vw, 5rem);
+            border-left: 0.1rem solid $v_color-secondary;
+
+            @include m_breakpoint(max, sm) {
                 border-left: none;
                 padding-left: 0;
 
                 padding-top: 3rem;
-                border-top: .1rem solid $v_color-secondary;
+                border-top: 0.1rem solid $v_color-secondary;
             }
         }
     }
 
-    &__infos{
-
-        @include m_breakpoint(max,sm){
+    &__infos {
+        @include m_breakpoint(max, sm) {
             text-align: center;
         }
 
-        img{
+        img {
             margin-bottom: 2rem;
 
-            @include m_breakpoint(max,sm){
+            @include m_breakpoint(max, sm) {
                 margin: 0 auto 2rem auto;
             }
         }
     }
 
-    &__contact{
+    &__contact {
         display: flex;
         grid-gap: 1rem;
         margin-top: 2rem;
 
-        @include m_breakpoint(max,sm){
+        @include m_breakpoint(max, sm) {
             justify-content: center;
         }
+    }
+}
+
+
+//? GSAP
+@include m_breakpoint(min,md){
+    h1{
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+    .headerContent__illu{
+        opacity: 0;
+        transform: translateX(5rem);
+    }
+
+    .shapes>*{
+        transform: scale(0);
     }
 }

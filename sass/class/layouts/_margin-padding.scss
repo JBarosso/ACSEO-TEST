@@ -16,7 +16,6 @@ $class_m-p:(
         @each $modifier, $val in $v_margins {
                     
             &--#{$modifier}{
-
                 #{$property}: $val;
             }
         }
@@ -65,15 +64,15 @@ $class_m-p:(
                 @include rfs_padding-top($val);
             }
 
-            &t--#{$modifier}{
+            &r--#{$modifier}{
                 @include rfs_padding-right($val);
             }
 
-            &t--#{$modifier}{
+            &b--#{$modifier}{
                 @include rfs_padding-bottom($val);
             }
 
-            &t--#{$modifier}{
+            &l--#{$modifier}{
                 @include rfs_padding-left($val);
             }
 
@@ -101,15 +100,15 @@ $class_m-p:(
                 @include rfs_margin-top($val);
             }
 
-            &t--#{$modifier}{
+            &r--#{$modifier}{
                 @include rfs_margin-right($val);
             }
 
-            &t--#{$modifier}{
+            &b--#{$modifier}{
                 @include rfs_margin-bottom($val);
             }
 
-            &t--#{$modifier}{
+            &l--#{$modifier}{
                 @include rfs_margin-left($val);
             }
 
